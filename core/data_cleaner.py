@@ -12,5 +12,5 @@ def clean_data(data):
     data['Amount'] = data['Amount'].astype(float)
     data['Day_of_Week'] = data['Transaction_Date'].dt.day_name()
     data['Hour'] = data['Transaction_Date'].dt.hour
-    data['Month'] = data['Transaction_Date'].dt.month
+    data['Month'] = data['Transaction_Date'].dt.strftime('%B')
     return data

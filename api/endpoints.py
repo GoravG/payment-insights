@@ -1,8 +1,9 @@
-from fastapi import APIRouter, File, UploadFile
+import json
+from fastapi import APIRouter, UploadFile
 from core.data_loader import load_data
 from core.data_cleaner import clean_data
 from core.data_analyzer import generate_insights_report
-from core.anomaly_remover import remove_anamolies
+from core.transaction_pattern_analyzer import TransactionPatternAnalyzer
 
 router = APIRouter()
 
@@ -20,3 +21,9 @@ async def analyze_file(file: UploadFile):
     # data = remove_anamolies(data)
     report = generate_insights_report(data)
     return {"report": report}
+
+@router.post("/analyze-transactions/")
+async def analyze_transactions_from_file(file: UploadFile):
+    report = await analyze_file(file)
+    analyzer = TransactionPatternAnalyzer.get_instance()
+    return report
