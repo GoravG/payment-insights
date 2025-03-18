@@ -1,0 +1,15 @@
+meta {
+  name: analyze
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{host}}:{{port}}/analyze
+  body: multipartForm
+  auth: none
+}
+
+body:multipart-form {
+  file: @file(/Users/gauravghenand/Downloads/144ea78a-c20e-4f95-984d-3ab4a7ce0915.csv)
+}
